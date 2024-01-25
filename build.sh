@@ -13,4 +13,4 @@ cmake -H. -Bbuild -GNinja \
     -DLLVM_EXTERNAL_LIT=$LLVM_LIT \
     -DCMAKE_BUILD_TYPE=Debug
 
-cmake --build build
+cmake --build build --target check-foo

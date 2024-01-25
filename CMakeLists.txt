@@ -26,3 +26,4 @@ if(APPLE AND ${CMAKE_C_COMPILER_VERSION} VERSION_GREATER_EQUAL 15.0)
 endif()
 
 add_subdirectory(tools)
+add_subdirectory(tests)
