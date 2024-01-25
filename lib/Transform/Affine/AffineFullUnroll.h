@@ -13,5 +13,14 @@ private:
   StringRef getArgument() const final { return "affine-full-unroll"; }
 };
 
+class AffineFullUnrollPassAsPatternRewrite
+    : public PassWrapper<AffineFullUnrollPassAsPatternRewrite,
+                         OperationPass<mlir::func::FuncOp>> {
+private:
+  void runOnOperation() override;
+  StringRef getArgument() const final { return "affine-full-unroll-rewrite"; }
+};
+
+
 } // namespace foo
 } // namespace mlir

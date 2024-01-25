@@ -11,6 +11,7 @@ int main(int argc, char **argv) {
   mlir::registerAllPasses();
 
   mlir::PassRegistration<mlir::foo::AffineFullUnrollPass>();
+  mlir::PassRegistration<mlir::foo::AffineFullUnrollPassAsPatternRewrite>();
 
   return mlir::asMainReturnCode(
       mlir::MlirOptMain(argc, argv, "foo opt\n", registry));
