@@ -25,5 +25,6 @@ if(APPLE AND ${CMAKE_C_COMPILER_VERSION} VERSION_GREATER_EQUAL 15.0)
   add_link_options(-Wl,-no_warn_duplicate_libraries)
 endif()
 
+add_subdirectory(lib)
 add_subdirectory(tools)
 add_subdirectory(tests)
