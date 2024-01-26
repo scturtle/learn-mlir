@@ -6,6 +6,7 @@ set (LIBS
   ${conversion_libs}
   MLIROptLib
   AffineFullUnroll
+  MulToAdd
 )
 
 add_llvm_executable(foo-opt FooOpt.cpp)

@@ -4,6 +4,7 @@
 #include "mlir/Tools/mlir-opt/MlirOptMain.h"
 
 #include "Transform/Affine/AffineFullUnroll.h"
+#include "Transform/Arith/Passes.h"
 
 int main(int argc, char **argv) {
   mlir::DialectRegistry registry;
@@ -12,6 +13,7 @@ int main(int argc, char **argv) {
 
   mlir::PassRegistration<mlir::foo::AffineFullUnrollPass>();
   mlir::PassRegistration<mlir::foo::AffineFullUnrollPassAsPatternRewrite>();
+  mlir::foo::registerArithPasses();
 
   return mlir::asMainReturnCode(
       mlir::MlirOptMain(argc, argv, "foo opt\n", registry));
