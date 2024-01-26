@@ -7,6 +7,7 @@ set (LIBS
   MLIROptLib
   AffineFullUnroll
   MulToAdd
+  MLIRPoly
 )
 
 add_llvm_executable(foo-opt FooOpt.cpp)
