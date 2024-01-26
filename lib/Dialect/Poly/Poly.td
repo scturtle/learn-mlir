@@ -2,5 +2,6 @@
 #define DIALECT_POLYOPS_TD
 
 include "PolyBase.td"
+include "PolyTypes.td"
 
 #endif // DIALECT_POLYOPS_TD
