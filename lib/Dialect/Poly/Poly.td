@@ -4,11 +4,14 @@
 include "PolyBase.td"
 include "PolyTypes.td"
 include "mlir/Interfaces/SideEffectInterfaces.td"
+include "mlir/Interfaces/InferTypeOpInterface.td"
 
-class Poly_BinOp<string mnemoic> : Op<Poly_Dialect, mnemoic, [Pure]> {
-  let arguments = (ins Polynomial:$lhs, Polynomial:$rhs);
-  let results = (outs Polynomial:$output);
-  let assemblyFormat = "$lhs `,` $rhs attr-dict `:` `(` type($lhs) `,` type($rhs) `)` `->` type($output)";
+def PolyOrContainer : TypeOrContainer<Polynomial, "poly-or-container">;
+
+class Poly_BinOp<string mnemoic> : Op<Poly_Dialect, mnemoic, [Pure, ElementwiseMappable, SameOperandsAndResultType]> {
+  let arguments = (ins PolyOrContainer:$lhs, PolyOrContainer:$rhs);
+  let results = (outs PolyOrContainer:$output);
+  let assemblyFormat = "$lhs `,` $rhs attr-dict `:` type($output)";
 }
 
 def Poly_AddOp : Poly_BinOp<"add"> {
