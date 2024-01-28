@@ -55,6 +55,12 @@ OpFoldResult FromTensorOp::fold(FromTensorOp::FoldAdaptor adaptor) {
   return dyn_cast_or_null<DenseIntElementsAttr>(adaptor.getInput());
 }
 
+LogicalResult EvalOp::verify() {
+  return getPoint().getType().isSignlessInteger(32)
+             ? success()
+             : emitOpError("argument point must be a 32-bit integer");
+}
+
 } // namespace poly
 } // namespace foo
 } // namespace mlir
