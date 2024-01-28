@@ -4,6 +4,7 @@
 #include "mlir/Interfaces/InferTypeOpInterface.h"
 #include "mlir/Interfaces/SideEffectInterfaces.h"
 
+#include "Dialect/Poly/PolyTraits.h"
 #include "Dialect/Poly/PolyTypes.h"
 
 #define GET_OP_CLASSES

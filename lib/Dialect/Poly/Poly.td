@@ -8,6 +8,10 @@ include "mlir/Interfaces/InferTypeOpInterface.td"
 
 def PolyOrContainer : TypeOrContainer<Polynomial, "poly-or-container">;
 
+def Has32BitArguments : NativeOpTrait<"Has32BitArguments"> {
+  let cppNamespace = "::mlir::foo::poly";
+}
+
 class Poly_BinOp<string mnemoic> : Op<Poly_Dialect, mnemoic, [Pure, ElementwiseMappable, SameOperandsAndResultType]> {
   let arguments = (ins PolyOrContainer:$lhs, PolyOrContainer:$rhs);
   let results = (outs PolyOrContainer:$output);
@@ -31,7 +35,7 @@ def Poly_FromTensorOp : Op<Poly_Dialect, "from_tensor", [Pure]> {
   let hasFolder = 1;
 }
 
-def Poly_EvalOp : Op<Poly_Dialect, "eval", [AllTypesMatch<["point", "output"]>]> {
+def Poly_EvalOp : Op<Poly_Dialect, "eval", [AllTypesMatch<["point", "output"]>, Has32BitArguments]> {
   let arguments = (ins Polynomial:$input, AnyInteger:$point);
   let results = (outs AnyInteger:$output);
   let assemblyFormat = "$input `,` $point attr-dict `:` `(` type($input) `,` type($point) `)` `->` type($output)";
