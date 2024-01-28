@@ -3,8 +3,9 @@
 
 include "PolyBase.td"
 include "PolyTypes.td"
+include "mlir/Interfaces/SideEffectInterfaces.td"
 
-class Poly_BinOp<string mnemoic> : Op<Poly_Dialect, mnemoic> {
+class Poly_BinOp<string mnemoic> : Op<Poly_Dialect, mnemoic, [Pure]> {
   let arguments = (ins Polynomial:$lhs, Polynomial:$rhs);
   let results = (outs Polynomial:$output);
   let assemblyFormat = "$lhs `,` $rhs attr-dict `:` `(` type($lhs) `,` type($rhs) `)` `->` type($output)";
@@ -19,7 +20,7 @@ def Poly_SubOp : Poly_BinOp<"sub"> {
 def Poly_MulOp : Poly_BinOp<"mul"> {
 }
 
-def Poly_FromTensorOp : Op<Poly_Dialect, "from_tensor"> {
+def Poly_FromTensorOp : Op<Poly_Dialect, "from_tensor", [Pure]> {
   let arguments = (ins TensorOf<[AnyInteger]>:$input);
   let results = (outs Polynomial:$output);
   let assemblyFormat = "$input attr-dict `:` type($input) `->` type($output)";
