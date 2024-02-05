@@ -15,6 +15,8 @@ module {
     %6 = poly.eval %4, %5 : (!poly.poly<10>, i32) -> i32
     %7 = tensor.from_elements %arg0, %arg1 : tensor<2x!poly.poly<10>>
     %8 = poly.add %7, %7 : tensor<2x!poly.poly<10>>
+    %9 = complex.constant [1.0, 2.0] : complex<f64>
+    %10 = poly.eval %4, %9 : (!poly.poly<10>, complex<f64>) -> complex<f64>
     return %6 : i32
   }
 }
