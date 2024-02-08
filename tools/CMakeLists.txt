@@ -8,6 +8,7 @@ set (LIBS
   AffineFullUnroll
   MulToAdd
   MLIRPoly
+  PolyToStandard
 )
 
 add_llvm_executable(foo-opt FooOpt.cpp)

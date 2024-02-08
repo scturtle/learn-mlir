@@ -3,6 +3,7 @@
 #include "mlir/InitAllPasses.h"
 #include "mlir/Tools/mlir-opt/MlirOptMain.h"
 
+#include "Conversion/PolyToStandard/PolyToStandard.h"
 #include "Dialect/Poly/PolyDialect.h"
 #include "Transform/Affine/AffineFullUnroll.h"
 #include "Transform/Arith/Passes.h"
@@ -17,6 +18,8 @@ int main(int argc, char **argv) {
   mlir::PassRegistration<mlir::foo::AffineFullUnrollPass>();
   mlir::PassRegistration<mlir::foo::AffineFullUnrollPassAsPatternRewrite>();
   mlir::foo::registerArithPasses();
+
+  mlir::foo::poly::registerPolyToStandardPasses();
 
   return mlir::asMainReturnCode(
       mlir::MlirOptMain(argc, argv, "foo opt\n", registry));

@@ -36,6 +36,12 @@ def Poly_FromTensorOp : Op<Poly_Dialect, "from_tensor", [Pure]> {
   let hasFolder = 1;
 }
 
+def Poly_ToTensorOp : Op<Poly_Dialect, "to_tensor", [Pure]> {
+  let arguments = (ins Polynomial:$input);
+  let results = (outs TensorOf<[AnyInteger]>:$output);
+  let assemblyFormat = "$input attr-dict `:` qualified(type($input)) `->` type($output)";
+}
+
 def IntOrComplex : AnyTypeOf<[AnyInteger, AnyComplex]>;
 
 def Poly_EvalOp : Op<Poly_Dialect, "eval", [AllTypesMatch<["point", "output"]>, Has32BitArguments]> {
