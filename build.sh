@@ -8,6 +8,8 @@ else
 fi
 
 cmake -H. -Bbuild -GNinja \
+    -DCMAKE_CXX_COMPILER=clang++ \
+    -DCMAKE_C_COMPILER=clang \
     -DLLVM_DIR="$LLVM_DIR/lib/cmake/llvm" \
     -DMLIR_DIR="$LLVM_DIR/lib/cmake/mlir" \
     -DLLVM_EXTERNAL_LIT=$LLVM_LIT \
