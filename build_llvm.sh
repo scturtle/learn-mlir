@@ -12,7 +12,7 @@ cmake -H$LLVM_DIR -B$BUILD_DIR -GNinja \
       -DLLVM_LOCAL_RPATH=$INSTALL_DIR/lib \
       -DLLVM_BUILD_EXAMPLES=OFF \
       -DLLVM_INSTALL_UTILS=ON \
-      -DCMAKE_BUILD_TYPE=Debug \
+      -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_ENABLE_ASSERTIONS=ON \
       -DLLVM_CCACHE_BUILD=ON \
       -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
@@ -21,4 +21,4 @@ cmake -H$LLVM_DIR -B$BUILD_DIR -GNinja \
       -DCMAKE_OSX_ARCHITECTURES="$(uname -m)" \
       -DCMAKE_OSX_SYSROOT="$(xcrun --show-sdk-path)"
 
-cmake --build $BUILD_DIR --target check-mlir
+cmake --build $BUILD_DIR --target check-mlir --target llc

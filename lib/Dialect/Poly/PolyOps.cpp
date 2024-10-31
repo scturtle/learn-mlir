@@ -31,7 +31,7 @@ OpFoldResult MulOp::fold(MulOp::FoldAdaptor adaptor) {
   if (!lhs || !rhs)
     return nullptr;
 
-  auto degree = getResult().getType().cast<PolynomialType>().getDegreeBound();
+  auto degree = cast<PolynomialType>(getResult().getType()).getDegreeBound();
   auto maxIndex = lhs.size() + rhs.size() - 1;
   SmallVector<APInt, 8> result;
   result.reserve(maxIndex);

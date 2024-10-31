@@ -1,4 +1,4 @@
-// RUN: foo-opt --poly-to-llvm %s | mlir-translate --mlir-to-llvmir | llc --filetype=obj > %t
+// RUN: foo-opt --poly-to-llvm %s | mlir-translate --mlir-to-llvmir | llc --filetype=obj -mtriple=arm64-apple-darwin > %t
 // RUN: clang -c ../../tests/poly_to_llvm_main.c
 // RUN: clang poly_to_llvm_main.o %t -o a.out
 // RUN: ./a.out | FileCheck %s

@@ -71,8 +71,8 @@ struct ConvertFromTensor : public OpConversionPattern<FromTensorOp> {
   LogicalResult
   matchAndRewrite(FromTensorOp op, OpAdaptor adaptor,
                   ConversionPatternRewriter &rewriter) const override {
-    auto outputTensorTy = typeConverter->convertType(op.getResult().getType())
-                              .cast<RankedTensorType>();
+    auto outputTensorTy = cast<RankedTensorType>(
+        typeConverter->convertType(op.getResult().getType()));
     auto outputShape = outputTensorTy.getShape()[0];
     auto inputShape = op.getInput().getType().getShape()[0];
     // Zero pad the tensor
@@ -128,7 +128,7 @@ struct ConvertMul : public OpConversionPattern<MulOp> {
   matchAndRewrite(MulOp op, OpAdaptor adaptor,
                   ConversionPatternRewriter &rewriter) const override {
     ImplicitLocOpBuilder b(op.getLoc(), rewriter);
-    auto mulTensorType = adaptor.getLhs().getType().cast<RankedTensorType>();
+    auto mulTensorType = cast<RankedTensorType>(adaptor.getLhs().getType());
     auto numTerms = mulTensorType.getShape()[0];
     // Create an all-zeros tensor to store the result
     auto polymulResult = b.create<arith::ConstantOp>(
